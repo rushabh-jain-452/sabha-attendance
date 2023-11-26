@@ -41,7 +41,7 @@
             <div class="form-group row">
                 <label for="date" class="col-md-2 col-form-label"><b>Sabha Date</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="date" id="date" max="<?php print(date('Y-m-d')); ?>" required>
+                    <input type="date" class="form-control" name="date" id="date" required>
                 </div>
                 <div class="col-md-2">
                     <select name="param" class="form-select" id="param">

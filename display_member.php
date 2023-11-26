@@ -68,11 +68,11 @@
             <div class="form-group row">
                 <label for="date" class="col-md-2 col-form-label"><b>From</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="startDate" id="startDate" max="<?php print(date('Y-m-d')); ?>" required>
+                    <input type="date" class="form-control" name="startDate" id="startDate" required>
                 </div>
                 <label for="date" class="col-md-2 col-form-label"><b>To</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="endDate" id="endDate" max="<?php print(date('Y-m-d')); ?>" required>
+                    <input type="date" class="form-control" name="endDate" id="endDate" required>
                 </div>
             </div>
             <div class="form-group row offset-2">

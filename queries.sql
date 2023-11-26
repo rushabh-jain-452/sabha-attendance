@@ -2,6 +2,7 @@ CREATE TABLE `attendancedb`.`member`
 (
     `memberid` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(100) NOT NULL,
+    `gender` CHAR(1) NOT NULL,
     `dob` DATE NOT NULL,
     `mobileno` VARCHAR(15) NOT NULL,
     `address` VARCHAR(500) NOT NULL,

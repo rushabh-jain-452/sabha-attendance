@@ -1,7 +1,7 @@
 <?php
     if(isset($_GET["btnSubmit"]) && isset($_GET["txtName"]) && isset($_GET["rdbGender"]) && isset($_GET["dtpBirthDate"]) && isset($_GET["txtMobileNo"]) && isset($_GET["txtAddress"])){
         include_once('conn.php');
-        
+
         $name = $_GET["txtName"];
         $gender = $_GET["rdbGender"];
         $dob = $_GET["dtpBirthDate"];
@@ -74,7 +74,7 @@
                     <div class="form-group row">
                         <label for="dtpBirthDate" class="col-md-2 col-form-label"><b>Birth Date</b></label>
                         <div class="col-md-4">
-                            <input type="date" class="form-control" name="dtpBirthDate" id="dtpBirthDate" max="<?php print(date('Y-m-d')); ?>" required>
+                            <input type="date" class="form-control" name="dtpBirthDate" id="dtpBirthDate" required>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -132,9 +132,10 @@
                     <div class="form-group row">
                         <label for="dtpBirthDate" class="col-md-2 col-form-label"><b>Birth Date</b></label>
                         <div class="col-md-4">
-                            <input type="date" class="form-control" name="dtpBirthDate" id="dtpBirthDate" max="<?php print(date('Y-m-d')); ?>" required>
+                            <input type="date" class="form-control" name="dtpBirthDate" id="dtpBirthDate" required>
                         </div>
                     </div>
+                    <br/>
                     <div class="form-group row">
                         <label for="txtMobileNo" class="col-md-2 col-form-label"><b>Mobile No</b></label>
                         <div class="col-md-4">
