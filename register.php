@@ -1,9 +1,7 @@
 <?php
     if(isset($_GET["btnSubmit"]) && isset($_GET["txtName"]) && isset($_GET["rdbGender"]) && isset($_GET["dtpBirthDate"]) && isset($_GET["txtMobileNo"]) && isset($_GET["txtAddress"])){
-        $con = new mysqli("localhost", "root", "", "attendancedb");
-        if($con->connect_errno){
-            die("Connection failed.".$con->connect_error);
-        }
+        include_once('conn.php');
+        
         $name = $_GET["txtName"];
         $gender = $_GET["rdbGender"];
         $dob = $_GET["dtpBirthDate"];

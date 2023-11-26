@@ -22,10 +22,7 @@
 		// Current date in PHP
 		$date = date('Y-m-d');
 
-		$con = new mysqli("localhost", "root", "", "attendancedb");
-		if($con->connect_errno){
-			die("Connection failed.".$con->connect_error);
-		}
+		include_once('conn.php');
 		
 		$memberid = $_GET["memberid"];
 		$name = $_GET["name"];

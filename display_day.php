@@ -2,10 +2,7 @@
     if(isset($_GET['date'])) {
         date_default_timezone_set('Asia/Kolkata');
 
-        $con = new mysqli("localhost", "root", "", "attendancedb");
-        if($con->connect_errno){
-            die("Connection failed.".$con->connect_error);
-        }
+        include_once('conn.php');
 
         $date = $_GET['date'];
         $param = $_GET['param'];
