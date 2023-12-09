@@ -16,7 +16,7 @@
 	$day = date('D');  // Fri
 	// $day = date('l');  // Friday
 
-	// if(strcmp($day, "Fri") == 0) {    // TODO: Uncomment this if condition
+	if(strcmp($day, "Fri") == 0) {    // TODO: Uncomment this if condition
 		// check if time between 8:30 and 9:30 / 10:00
 		
 		// Current date in PHP
@@ -37,7 +37,7 @@
 		}
 
 		// $con->close();
-	// } 
+	} 
 	// else {
 	// 	echo('<script>alert("Today is not Friday");</script>');
 	// }
