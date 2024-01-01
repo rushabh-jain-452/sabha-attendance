@@ -1,8 +1,5 @@
 <?php
-	// find dept_id from dept_name
-	// $result = $con->query("SELECT dept_id FROM tbl_dept WHERE name='$dept_name'");
-	// $row = $result->fetch_row();
-	// $dept_id = $row[0];
+	include_once('conn.php');
 
 	// Check timezone
 	date_default_timezone_set('Asia/Kolkata');
@@ -10,41 +7,61 @@
 	// $timezone = date_default_timezone_get();
 	// echo('<script>alert("'.$timezone.'");</script>');
 
+	$memberid = '';
+	if(isset($_GET["memberid"])) {
+		$memberid = $_GET["memberid"];
+	}
+
+	$name = '';
+	if(isset($_GET["name"])) {
+		$name = $_GET["name"];
+	}
+
+	// Check if member is active
+	$sql = "SELECT * FROM member WHERE memberid=$memberid AND active=true";
+	$result = $con->query($sql);
+	if($result->num_rows < 1){
+		$result->free();
+		echo '<script>alert("Invalid Member ID");</script>';
+		exit();
+	}
 
 	// Check if today is friday or not
 	// date_diff(datetime1, datetime2, absolute)
 	$day = date('D');  // Fri
 	// $day = date('l');  // Friday
 
-	if(strcmp($day, "Fri") == 0) {    // TODO: Uncomment this if condition
+	// if(strcmp($day, "Fri") == 0) {    // TODO: Uncomment this if condition
 		// check if time between 8:30 and 9:30 / 10:00
 		
 		// Current date in PHP
 		$date = date('Y-m-d');
 
-		include_once('conn.php');
-		
-		$memberid = $_GET["memberid"];
-		$name = $_GET["name"];
-
 		$sql = "INSERT INTO attendance (memberid, date) VALUES ($memberid, '$date')";
-		if($con->query($sql)){
-			echo('<script>alert("Attendance submitted successfully");</script>');
-		}
-		else{	
+		try {
+			if($con->query($sql)){
+				echo('<script>alert("Attendance submitted successfully");</script>');
+			}
+			else{	
+				echo('<script>alert("Attendance already submitted for today");</script>');
+				echo 'Error : '.$sql."<br>\n".$con->error;
+			}
+		} catch(Exception $e) {
 			echo('<script>alert("Attendance already submitted for today");</script>');
-			echo 'Error : '.$sql."<br>\n".$con->error;
+			echo 'Error : '.$sql."<br>\n".$e->getMessage();
 		}
 
 		// $con->close();
-	} 
+	// } 
 	// else {
 	// 	echo('<script>alert("Today is not Friday");</script>');
 	// }
 
 	// Display Records
-    $sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 52";
-	$result = $con->query($sql);
+    if($memberid != null) {
+		$sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 52";
+		$result = $con->query($sql);
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,21 +90,34 @@
             <div class="col-md-12">
                 <table class="table table-success table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
                     <tr>
-                        <th>Date</th>
-                        <th>Attendance Timestamp</th>
+                        <th class="text-center">Date</th>
+                        <!-- <th class="text-center">Attendance Timestamp</th> -->
+						<th class="text-center">Time</th>
                     </tr>
 					<?php
+					if(isset($result)) {
 						while($row = $result->fetch_assoc()) { 
+							// $dateStr = $row['timestamp'];
+							// $t = strtotime($dateStr);
+							$datetime = new DateTime($row['timestamp']);
+							$datetime->add(new DateInterval('PT10H30M'));
 					?>
 						<tr>
 							<td> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
-							<td> <?= $row['timestamp'] ?> </td>
+							<!-- <td> <?= $row['timestamp'] ?> </td> -->
+							<!-- <td> <?= $datetime->format('Y-m-d H:i:s') ?> </td> -->
+							<!-- <td> <?= $datetime->format('H:i') ?> </td> -->
+							<td> <?= $datetime->format('g:i A') ?> </td>
 						</tr>
 					<?php
 						}
+					}
 					?>
                 </table>
-                <br/><br/>
+                <br/>
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
+                </div>
             </div>
         </div>
     </div>

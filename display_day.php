@@ -1,16 +1,24 @@
 <?php
+    session_start();
+    if(!isset($_SESSION["username"])){
+        header("location:login.php");
+        exit();
+    }
+    $username = $_SESSION["username"];
+    $mandal = $_SESSION["mandal"];
+
+    $date = isset($_GET['date']) ? $_GET['date'] : '';
+    $param = isset($_GET['param']) ? $_GET['param'] : '';
+
     if(isset($_GET['date'])) {
         date_default_timezone_set('Asia/Kolkata');
 
         include_once('conn.php');
 
-        $date = $_GET['date'];
-        $param = $_GET['param'];
-
-        $sql = "SELECT member.memberid as memberid, name, gender, dob, mobileno, address, attendance.timestamp as timestamp FROM member INNER JOIN attendance ON member.memberid = attendance.memberid WHERE attendance.date = '$date' ORDER BY attendance.timestamp";
+        $sql = "SELECT member.memberid as memberid, name, gender, dob, mobileno, address, attendance.timestamp as timestamp FROM member INNER JOIN attendance ON member.memberid = attendance.memberid WHERE attendance.date = '$date' AND mandal='$mandal' ORDER BY attendance.timestamp";
 
         if(strcmp($param, "Absent") == 0) {
-            $sql = "SELECT memberid, name, gender, dob, mobileno, address, '' as timestamp FROM member WHERE memberid NOT IN (SELECT memberid from attendance WHERE date = '$date')";
+            $sql = "SELECT memberid, name, gender, dob, mobileno, address, '' as timestamp FROM member WHERE memberid NOT IN (SELECT memberid from attendance WHERE date = '$date') AND mandal='$mandal'";
         }
 
 	    $result = $con->query($sql);
@@ -31,7 +39,12 @@
     </style>
 </head>
 <body>
-    <div class="container bg-light">
+    <div class="container-fluid bg-light">
+        <div class="row">
+            <div class="col-md-12 pt-3">
+                <a href="home.php">< Go back to Home</a>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 pt-3">
                 <h1 class="text-center"><u>Attendance for Date</u></h1>
@@ -70,27 +83,39 @@
                 <table class="table table-bordered table-responsive-md table-sm align-middle">
                     <thead>
                         <tr class="table-primary">
-                            <th>Member ID</th>
-                            <th>Name</th>
-                            <th>Gender</th>
-                            <th>Birth Date</th>
-                            <th>Mobile No</th>
+                            <th class="text-center">ID</th>
+                            <?php
+                                if(strcmp($param, "Present") == 0) {
+                                    echo('<th class="text-center">Time</th>');
+                                }
+                            ?>
+                            <th class="text-center">Name</th>
+                            <!-- <th class="text-center">Gender</th> -->
+                            <th class="text-center">Birthday</th>
+                            <th class="text-center">Mobile No</th>
                             <!-- <th>Address</th> -->
-                            <th>Time</th>
                         </tr>
                     </thead>
 					<?php
 					if(isset($result)) {
                         while($row = $result->fetch_assoc()) { 
+                            $datetime = new DateTime($row['timestamp']);
+							$datetime->add(new DateInterval('PT10H30M'));
 					?>
 						<tr>
 							<td> <?= $row['memberid'] ?> </td>
+                            <!-- <td> <?= $datetime->format('g:i A') ?> </td> -->
+                            <!-- <td><?= $row['timestamp'] != "" ? $datetime->format('g:i A') : "" ?></td> -->
+                            <?php
+                                if(strcmp($param, "Present") == 0) {
+                                    echo('<td>'.$datetime->format('g:i A').'</td>');
+                                }
+                            ?>
                             <td> <?= $row['name'] ?> </td>
-                            <td> <?= $row['gender'] ?> </td>
-                            <td> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') ?> </td>
+                            <!-- <td> <?= $row['gender'] ?> </td> -->
+                            <td> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M') ?> </td>
                             <td> <?= $row['mobileno'] ?> </td>
                             <!-- <td> <?= $row['address'] ?> </td> -->
-                            <td> <?= $row['timestamp'] ?> </td>
 						</tr>
 					<?php
 						}

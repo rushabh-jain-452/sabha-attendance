@@ -1,11 +1,19 @@
 <!-- Filter by date -->
 <!-- Filter by name from dropdown -->
 <?php
+    session_start();
+    if(!isset($_SESSION["username"])){
+        header("location:login.php");
+        exit();
+    }
+    $username = $_SESSION["username"];
+    $mandal = $_SESSION["mandal"];
+
     date_default_timezone_set('Asia/Kolkata');
 
     include_once('conn.php');
 
-    $sql = "SELECT memberid, name FROM member ORDER BY name";
+    $sql = "SELECT memberid, name FROM member WHERE mandal='$mandal' AND active=true ORDER BY name";
 
     $memberResult = $con->query($sql);
 
@@ -24,9 +32,23 @@
         $startTime = strtotime($startDate);
         $endTime = strtotime($endDate);
 
+        if($endTime <= $startTime) {
+            echo('<script>alert("To Date cannot be less than From Date");</script>');
+        }
+
         $weeks = ceil(($endTime - $startTime) / 60 / 60 / 24 / 7);
 
-        $per = $n * 100 / $weeks;
+        $per = 0;
+        try {
+            if($n != 0) {
+                $per = $n * 100 / $weeks;
+                $per = round($per, 2);
+            }
+        }
+        catch (Exception $e) {
+            echo('<script>alert("Error");</script>');
+            echo 'Error : '.$e->getMessage();
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -46,7 +68,12 @@
     <div class="container bg-light">
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h1 class="text-center"><u>Attendance for Member</u></h1>
+                <a href="home.php">< Go back to Home</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 pt-3">
+                <h3 class="text-center"><u>Attendance for Member</u></h3>
             </div>
         </div>
         <form method="GET" action="" id="searchByMemberForm">
@@ -85,23 +112,24 @@
         <hr/>
         <div class="row">
             <div class="col-md-12">
-                <h2 class="text-center">From <?= isset($startDate) ? DateTime::createFromFormat('Y-m-d', $startDate)->format('d M Y') : '' ?> 
-                    to <?= isset($endDate) ? DateTime::createFromFormat('Y-m-d', $endDate)->format('d M Y') : '' ?> 
-                </h2>
-                <h2 class="text-center">Total <?= isset($n) ? $n : 0 ?> sabha attended out of <?= isset($weeks) ? $weeks : 0 ?> (<?= isset($per) ? $per : 0 ?> %) </h2>
+                <h4 class="text-center"><u>From <?= isset($startDate) ? DateTime::createFromFormat('Y-m-d', $startDate)->format('d M Y') : '' ?> 
+                    to <?= isset($endDate) ? DateTime::createFromFormat('Y-m-d', $endDate)->format('d M Y') : '' ?> </u>
+                </h4>
+                <h5 class="text-center">Total <?= isset($n) ? $n : 0 ?> sabha attended out of <?= isset($weeks) ? $weeks : 0 ?> (<?= isset($per) ? $per : 0 ?> %) </h5>
                 <table class="table table-success table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
                     <tr>
-                        <th>Date</th>
-                        <th>Attendance Timestamp</th>
+                        <th class="text-center">Date</th>
+                        <th class="text-center">Attendance Timestamp</th>
                     </tr>
 					<?php
                     if(isset($result)) {
                         while($row = $result->fetch_assoc()) { 
-                        
+                            $datetime = new DateTime($row['timestamp']);
+							$datetime->add(new DateInterval('PT10H30M'));
 					?>
 						<tr>
 							<td> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
-							<td> <?= $row['timestamp'] ?> </td>
+							<td> <?= $datetime->format('g:i A') ?> </td>
 						</tr>
 					<?php
 						}
