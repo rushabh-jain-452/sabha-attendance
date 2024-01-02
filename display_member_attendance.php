@@ -17,11 +17,11 @@
 
     $memberResult = $con->query($sql);
 
-    if(isset($_GET['memberid'])) {
-        $startDate = $_GET['startDate'];
-        $endDate = $_GET['endDate'];
-        $memberid = $_GET['memberid'];
+    $startDate = isset($_GET['startDate']) ? $_GET['startDate'] : null;
+    $endDate = isset($_GET['endDate']) ? $_GET['endDate'] : null;
+    $memberid = isset($_GET['memberid']) ? $_GET['memberid'] : null;
 
+    if(isset($_GET['memberid'])) {
         $sql = "SELECT * FROM attendance WHERE memberid = $memberid AND date BETWEEN '$startDate' AND '$endDate' ORDER BY attendanceid";
 
         $result = $con->query($sql);
@@ -79,12 +79,12 @@
         <form method="GET" action="" id="searchByMemberForm">
             <div class="form-group row">
                 <label for="date" class="col-md-2 col-form-label"><b>Name</b></label>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <select name="memberid" class="form-select" id="memberid">
                         <?php
                             while($row = $memberResult->fetch_assoc()) { 
                         ?>
-                            <option value="<?= $row['memberid'] ?>"> <?= $row['name'] ?> </option>
+                            <option value="<?= $row['memberid'] ?>" <?= $memberid == $row['memberid'] ? 'selected' : '' ?>> <?= $row['name'] ?> </option>
                         <?php
                             }
                         ?>
@@ -95,11 +95,11 @@
             <div class="form-group row">
                 <label for="date" class="col-md-2 col-form-label"><b>From</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="startDate" id="startDate" required>
+                    <input type="date" class="form-control" name="startDate" id="startDate" value="<?= $startDate != null ? $startDate : date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>" required>
                 </div>
                 <label for="date" class="col-md-2 col-form-label"><b>To</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="endDate" id="endDate" required>
+                    <input type="date" class="form-control" name="endDate" id="endDate" value="<?= $endDate != null ? $endDate : date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>" required>
                 </div>
             </div>
             <div class="form-group row offset-2">

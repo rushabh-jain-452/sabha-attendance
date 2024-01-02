@@ -7,6 +7,8 @@
     $username = $_SESSION["username"];
     $mandal = $_SESSION["mandal"];
 
+    date_default_timezone_set('Asia/Kolkata');
+
     $date = isset($_GET['date']) ? $_GET['date'] : '';
     $param = isset($_GET['param']) ? $_GET['param'] : '';
 
@@ -54,12 +56,12 @@
             <div class="form-group row">
                 <label for="date" class="col-md-2 col-form-label"><b>Sabha Date</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="date" id="date" required>
+                    <input type="date" class="form-control" name="date" id="date" value="<?= $date != '' ? $date : date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>" required>
                 </div>
                 <div class="col-md-2">
                     <select name="param" class="form-select" id="param">
-                        <option value="Absent">Absent</option>
-                        <option value="Present" selected>Present</option>
+                        <option value="Absent" <?= strcmp($param, "Absent") == 0 ? 'selected' : '' ?>>Absent</option>
+                        <option value="Present" <?= strcmp($param, "Present") == 0 ? 'selected' : '' ?>>Present</option>
                     </select>
                 </div>
                 <!-- <div class="dropdown col-md-2">
