@@ -9,7 +9,11 @@
 
     include_once('conn.php');
 
-    $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND active=true ORDER BY memberid";
+    // Only Active Members
+    // $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND active=true ORDER BY memberid";
+
+    // All Members
+    $sql = "SELECT * FROM member WHERE Mandal='$mandal' ORDER BY memberid";
 
     $result = $con->query($sql);
     // echo('<script>alert("No of members : '.$result->num_rows.'");</script>');
@@ -65,7 +69,7 @@
                             <td> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') ?> </td>
                             <td> <?= $row['mobileno'] ?> </td>
                             <td> <?= $row['address'] ?> </td>
-                            <td> <?= $row['active'] ?> </td>
+                            <td> <?= $row['active']==1 ? "Yes" : "No" ?> </td>
 						</tr>
 					<?php
 						}
