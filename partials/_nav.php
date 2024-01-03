@@ -18,20 +18,45 @@
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="register.php">Register</a>
                 </li> -->
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Reports
+                        Display Members
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="display_members.php">All Members</a></li>
+                        <li><a class="dropdown-item" href="display_active_members.php">Active Members</a></li>
+                        <li><a class="dropdown-item" href="display_inactive_members.php">Inactive Members</a></li>
+                        <li><a class="dropdown-item" href="display_detailed_report.php">Detailed Report</a></li>
+                        <li><a class="dropdown-item" href="display_members_not_attending_sabha.php">Members not attending Sabha</a></li>
+                        <li><a class="dropdown-item" href="filter_members.php">Filter Members</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Attendance Reports
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="display_day.php">Check Attendance for Date</a></li>
                         <li><a class="dropdown-item" href="display_member_attendance.php">Check Attendance for Member</a></li>
-                        <li><a class="dropdown-item" href="display_members.php">Display All Members</a></li>
+                        <!-- <li class="nav-item dropdown">
+                            <a>Display Members</a>
+                            <ul class="dropdown-menu">
+                                <li>Item 1</li>
+                                <li>Item 2</li>
+                            </ul>
+                        </li> -->
+
+
+                        <!-- <li><a class="dropdown-item" href="display_members.php">Display All Members</a></li> -->
                         <!-- <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li> -->
                     </ul>
                 </li>
+                
                 <!-- <li class="nav-item">
                     <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                 </li> -->
