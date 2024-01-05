@@ -56,7 +56,9 @@
                 <h4 class="align-center"><a href="display_members.php">All Members</a></h4>
                 <h4 class="align-center"><a href="display_active_members.php">Active Members</a></h4>
                 <h4 class="align-center"><a href="display_inactive_members.php">Inactive Members</a></h4>
+                <h4 class="align-center"><a href="display_ambrish_report.php">Ambrish Report</a></h4>
                 <h4 class="align-center"><a href="display_detailed_report.php">Detailed Members Report</a></h4>
+                <h4 class="align-center"><a href="display_age_wise_members.php">Age-wise Report</a></h4>
                 <h4 class="align-center"><a href="display_members_not_attending_sabha.php">Members not attending Sabha</a></h4>
                 <h4 class="align-center"><a href="filter_members.php">Filter Members</a></h4>
                 <br/><br/>

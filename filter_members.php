@@ -12,10 +12,12 @@
     $searchText = '';
     if(isset($_GET['btnSearch']) && isset($_GET['searchText'])) {
         $searchText = $_GET['searchText'];
-        $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND (memberid LIKE '%$searchText%' OR name LIKE '%$searchText%' OR mobileno LIKE '%$searchText%' OR dob LIKE '%$searchText%' OR age LIKE '%$searchText%' OR marital_status LIKE '%$searchText%' OR blood_group LIKE '%$searchText%' OR qualification LIKE '%$searchText%' OR occupation LIKE '%$searchText%' OR address LIKE '%$searchText%') ORDER BY memberid";
+        $sql = "SELECT memberid, name, mobileno, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, marital_status, blood_group, qualification, occupation, address, active 
+        FROM member WHERE Mandal='$mandal' AND (memberid LIKE '%$searchText%' OR name LIKE '%$searchText%' OR mobileno LIKE '%$searchText%' OR dob LIKE '%$searchText%' OR age LIKE '%$searchText%' OR marital_status LIKE '%$searchText%' OR blood_group LIKE '%$searchText%' OR qualification LIKE '%$searchText%' OR occupation LIKE '%$searchText%' OR address LIKE '%$searchText%') ORDER BY memberid";
     } else {
         $searchText = '';
-        $sql = "SELECT * FROM member WHERE Mandal='$mandal' ORDER BY memberid";
+        $sql = "SELECT memberid, name, mobileno, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, marital_status, blood_group, qualification, occupation, address, active 
+        FROM member WHERE Mandal='$mandal' ORDER BY memberid";
     }
 
     $result = $con->query($sql);
@@ -96,7 +98,7 @@
                             <td class="text-center"> <?= $row['mobileno'] ?> </td>
                             <!-- <td> <?= $row['gender'] ?> </td> -->
                             <td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') ?> </td>
-                            <td class="text-center"> <?= $row['age'] ?> </td>
+                            <td class="text-center"> <?= $row['my_age'] ?> </td>
                             <td class="text-center"> <?= $row['marital_status'] ?> </td>
                             <td class="text-center"> <?= $row['blood_group'] ?> </td>
                             <td class="text-center"> <?= $row['qualification'] ?> </td>

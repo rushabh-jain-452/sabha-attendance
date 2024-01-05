@@ -9,11 +9,14 @@
 
     include_once('conn.php');
 
-    // Only Active Members
-    // $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND active=true ORDER BY memberid";
+    $param = isset($_GET['param']) ? $_GET['param'] : 'Ambrish';
 
-    // All Members
-    $sql = "SELECT memberid, name, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, mobileno, qualification, occupation, address, active FROM member WHERE Mandal='$mandal' ORDER BY memberid";
+    // Only Ambrish Members
+    $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND is_ambrish=true AND active=true ORDER BY memberid";
+
+    if(strcmp($param, "Not_Ambrish") == 0) {
+        $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND is_ambrish=false AND active=true ORDER BY memberid";
+    }
 
     $result = $con->query($sql);
     // echo('<script>alert("No of members : '.$result->num_rows.'");</script>');
@@ -39,9 +42,33 @@
                 <a href="home.php">< Go back to Home</a>
             </div>
         </div>
+        <form method="GET" action="" id="searchByDayForm">
+            <div class="form-group row align-items-center justify-content-center">
+                <label for="param" class="col-md-1 col-form-label"><b>Select</b></label>
+                <div class="col-md-2">
+                    <select name="param" class="form-select" id="param">
+                        <option value="Ambrish" <?= strcmp($param, "Ambrish") == 0 ? 'selected' : '' ?>>Ambrish</option>
+                        <option value="Not_Ambrish" <?= strcmp($param, "Not_Ambrish") == 0 ? 'selected' : '' ?>>Not Ambrish</option>
+                    </select>
+                </div>
+                <!-- <div class="dropdown col-md-2">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Present</a></li>
+                        <li><a class="dropdown-item" href="#">Absent</a></li>
+                    </ul>
+                </div> -->
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary" name="btnSearch">Search</button>
+                </div>
+            </div>
+        </form>
+        <hr/>
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h3 class="text-center"><u>All Members of <?= $mandal ?> Mandal</u></h3>
+                <h3 class="text-center"><u><b><?= $param ?></b> Members of <?= $mandal ?> Mandal</u></h3>
             </div>
         </div>
         <div class="row">
@@ -54,29 +81,21 @@
                             <th class="text-center">Name</th>
                             <!-- <th class="text-center">Gender</th> -->
                             <th class="text-center">Birth date</th>
-                            <th class="text-center">Age</th>
                             <th class="text-center">Mobile No</th>
-                            <th class="text-center">Qualification</th>
-                            <th class="text-center">Occupation</th>
                             <th class="text-center">Address</th>
-                            <th class="text-center">Active</th>
                         </tr>
                     </thead>
 					<?php
 					if(isset($result)) {
                         while($row = $result->fetch_assoc()) { 
 					?>
-						<tr class="<?= $row['active']==0 ? 'table-danger' : '' ?>">
+						<tr>
 							<td class="text-center"> <?= $row['memberid'] ?> </td>
                             <td> <?= $row['name'] ?> </td>
                             <!-- <td> <?= $row['gender'] ?> </td> -->
                             <td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') ?> </td>
-                            <td class="text-center"> <?= $row['my_age'] ?> </td>
                             <td class="text-center"> <?= $row['mobileno'] ?> </td>
-                            <td class="text-center"> <?= $row['qualification'] ?> </td>
-                            <td class="text-center"> <?= $row['occupation'] ?> </td>
                             <td> <?= $row['address'] ?> </td>
-                            <td class="text-center"> <?= $row['active']==1 ? "Yes" : "No" ?> </td>
 						</tr>
 					<?php
 						}
