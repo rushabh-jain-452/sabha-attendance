@@ -15,6 +15,7 @@
 	$name = '';
 	if(isset($_GET["name"])) {
 		$name = $_GET["name"];
+		$name = str_replace('_', ' ', $name);
 	}
 
 	// Check if member is active
@@ -82,6 +83,16 @@
 	<!-- <h3>જય સ્વામિનારાયણ 🙏🏻</h3> -->
 	<!-- <h3>દાસના દાસ 🙏🏻</h3> -->
 	<div class="container bg-light">
+		<div class="row g-3 align-items-center justify-content-center">
+			<div class="col-auto">
+				<br/>
+				<h3>
+					<!-- <b>Name : </b>  -->
+					<?= $name ?>
+				</h3>
+			</div>
+		</div>
+		<hr/>
         <div class="row">
             <div class="col-md-12 pt-3">
                 <h4 class="text-center">Attended Sabha</h4>
@@ -89,8 +100,8 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-success table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
-                    <tr>
+                <table class="table table-light table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
+                    <tr class="table-primary">
                         <th class="text-center">Date</th>
                         <!-- <th class="text-center">Attendance Timestamp</th> -->
 						<th class="text-center">Time</th>
@@ -104,11 +115,11 @@
 							$datetime->add(new DateInterval('PT10H30M'));
 					?>
 						<tr>
-							<td> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
+							<td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
 							<!-- <td> <?= $row['timestamp'] ?> </td> -->
 							<!-- <td> <?= $datetime->format('Y-m-d H:i:s') ?> </td> -->
 							<!-- <td> <?= $datetime->format('H:i') ?> </td> -->
-							<td> <?= $datetime->format('g:i A') ?> </td>
+							<td class="text-center"> <?= $datetime->format('g:i A') ?> </td>
 						</tr>
 					<?php
 						}
@@ -119,6 +130,9 @@
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
+				<br/>
+				<br/>
+				<br/>
             </div>
         </div>
     </div>

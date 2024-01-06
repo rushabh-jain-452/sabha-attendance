@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h5 class="text-center">Total number of Members : <?= isset($result) ? $result -> num_rows : 0 ?></h5>
-                <table class="table table-bordered table-responsive-md table-sm align-middle">
+                <table class="table table-bordered table-striped table-responsive-md table-sm align-middle">
                     <thead>
                         <tr class="table-primary">
                             <th class="text-center">ID</th>
@@ -82,6 +82,9 @@
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
+                <br/>
+                <br/>
+                <br/>
             </div>
         </div>
     </div>

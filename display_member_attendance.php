@@ -117,8 +117,8 @@
                     to <?= isset($endDate) ? DateTime::createFromFormat('Y-m-d', $endDate)->format('d M Y') : '' ?> </u>
                 </h4>
                 <h5 class="text-center">Total <?= isset($n) ? $n : 0 ?> sabha attended out of <?= isset($weeks) ? $weeks : 0 ?> (<?= isset($per) ? $per : 0 ?> %) </h5>
-                <table class="table table-success table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
-                    <tr>
+                <table class="table table-light table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
+                    <tr class="table-primary">
                         <th class="text-center">Date</th>
                         <th class="text-center">Attendance Timestamp</th>
                     </tr>
@@ -129,8 +129,8 @@
 							$datetime->add(new DateInterval('PT10H30M'));
 					?>
 						<tr>
-							<td> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
-							<td> <?= $datetime->format('g:i A') ?> </td>
+							<td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
+							<td class="text-center"> <?= $datetime->format('g:i A') ?> </td>
 						</tr>
 					<?php
 						}
@@ -141,6 +141,8 @@
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
+                <br/>
+                <br/>
                 <br/>
             </div>
         </div>

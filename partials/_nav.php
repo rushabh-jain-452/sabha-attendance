@@ -29,8 +29,9 @@
                         <li><a class="dropdown-item" href="display_ambrish_report.php">Ambrish Report</a></li>
                         <li><a class="dropdown-item" href="display_detailed_report.php">Detailed Report</a></li>
                         <li><a class="dropdown-item" href="display_age_wise_members.php">Age-wise Report</a></li>
+                        <li><a class="dropdown-item" href="display_monthly_birthday_report.php">Monthly Birthday Report</a></li>
                         <li><a class="dropdown-item" href="display_members_not_attending_sabha.php">Members not attending Sabha</a></li>
-                        <li><a class="dropdown-item" href="filter_members.php">Filter Members</a></li>
+                        <li><a class="dropdown-item" href="filter_members.php">Search Members</a></li>
                     </ul>
                 </li>
 
@@ -38,6 +39,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Attendance Reports </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="display_day.php">Check Attendance for Date</a></li>
+                        <li><a class="dropdown-item" href="display_day_with_photo.php">Check Attendance for Date (with Photo)</a></li>
                         <li><a class="dropdown-item" href="display_member_attendance.php">Check Attendance for Member</a></li>
                         <!-- <li class="nav-item dropdown">
                             <a>Display Members</a>

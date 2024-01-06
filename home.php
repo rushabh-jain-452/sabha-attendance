@@ -40,9 +40,9 @@
                 <br />
                 <h3 class="align-center">Hello <?php echo $name ?></h3>
                 <hr />
-                <h3 class="align-center">🙏🏻 જય સ્વામિનારાયણ 🙏🏻</h3>
+                <!-- <h3 class="align-center">🙏🏻 જય સ્વામિનારાયણ 🙏🏻</h3>
                 <h4 class="align-center">🙏🏻 દાસના દાસ 🙏🏻</h4>
-                <hr />
+                <hr /> -->
                 <h1 class="align-center">Welcome to Sabha Attendance Management System</h1>
             </div>
         </div>
@@ -51,6 +51,7 @@
                 <!-- <h3 class="align-center"><a href="register.php">Register new member</a></h3> -->
                 <hr />
                 <h4 class="align-center"><a href="display_day.php">Check Attendance for Date</a></h4>
+                <h4 class="align-center"><a href="display_day_with_photo.php">Check Attendance for Date (with Photo)</a></h4>
                 <h4 class="align-center"><a href="display_member_attendance.php">Check Attendance for Member</a></h4>
                 <hr />
                 <h4 class="align-center"><a href="display_members.php">All Members</a></h4>
@@ -59,8 +60,10 @@
                 <h4 class="align-center"><a href="display_ambrish_report.php">Ambrish Report</a></h4>
                 <h4 class="align-center"><a href="display_detailed_report.php">Detailed Members Report</a></h4>
                 <h4 class="align-center"><a href="display_age_wise_members.php">Age-wise Report</a></h4>
+                <h4 class="align-center"><a href="display_monthly_birthday_report.php">Monthly Birthday Report</a></h4>
                 <h4 class="align-center"><a href="display_members_not_attending_sabha.php">Members not attending Sabha</a></h4>
-                <h4 class="align-center"><a href="filter_members.php">Filter Members</a></h4>
+                <h4 class="align-center"><a href="filter_members.php">Search Members</a></h4>
+                <br/><br/>
                 <br/><br/>
             </div>
         </div>

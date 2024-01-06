@@ -9,15 +9,15 @@
 
     include_once('conn.php');
 
-    $startAge = 1;
-    $endAge = 30;
+    $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
-    if (isset($_GET['startAge']) && isset($_GET['endAge'])) {
-        $startAge = $_GET['startAge'];
-        $endAge = $_GET['endAge'];
+    $month = date('m') - 1;
+
+    if (isset($_GET['month'])) {
+        $month = $_GET['month'];
     }
 
-    $sql = "SELECT memberid, name, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, mobileno, address, active FROM member WHERE (TIMESTAMPDIFF(YEAR, dob, CURDATE())) BETWEEN $startAge AND $endAge AND mandal='$mandal' AND active=true ORDER BY my_age";
+    $sql = "SELECT memberid, name, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, mobileno, address, active FROM member WHERE MONTH(dob) = $month+1 AND mandal='$mandal' AND active=true ORDER BY DAY(dob)";
 
     $result = $con->query($sql);
 ?>
@@ -47,19 +47,19 @@
             </div>
         </div>
 
-        <form method="GET" action="" id="searchByDaysForm">
+        <form method="GET" action="" id="searchByMonthForm">
             <div class="row g-3 align-items-center justify-content-center">
                 <div class="col-auto">
-                    <label for="startAge" class="col-form-label"><b>Age between</b></label>
+                    <label for="month" class="col-form-label"><b>Select Month</b></label>
                 </div>
                 <div class="col-auto">
-                    <input type="number" class="form-control col-md-1" name="startAge" id="startAge" value="<?= $startAge ?>" required>
-                </div>
-                <div class="col-auto">
-                    <label for="days" class="col-form-label"><b>and</b></label>
-                </div>
-                <div class="col-auto">
-                    <input type="number" class="form-control col-md-1" name="endAge" id="endAge" value="<?= $endAge ?>" required>
+                    <select name="month" class="form-select" id="month">
+                        <?php
+                            for($i=0; $i < sizeof($months); $i++) {
+                                echo('<option value="'.$i.'" '.($month==$i?'selected':'').'>'.$months[$i].'</option>');
+                            }
+                        ?>
+                    </select>
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary" name="btnSearch">Search</button>
@@ -70,7 +70,7 @@
         <hr />
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h3 class="text-center"><u>Members of <?= $mandal ?> Mandal of age between <?= $startAge ?> and <?= $endAge ?> Years</u></h3>
+                <h3 class="text-center"><u>Members of <?= $mandal ?> Mandal having birthday in <?= $month ?> Month</u></h3>
             </div>
         </div>
         <div class="row">
@@ -125,14 +125,14 @@
                                         class="btn btn-sm btn-primary">
                                         <?= $row['active'] == 1 ? 'Deactivate' : 'Activate' ?>
                                     </a></td> -->
-                                <td class="text-center">
-                                    <a href="member_details.php?memberid=<?= $row['memberid'] ?>" class="btn btn-sm btn-primary" title="View Details">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                                        </svg>
-                                    </a>
-                                </td>
+                                    <td class="text-center">
+                                <a href="member_details.php?memberid=<?= $row['memberid'] ?>" class="btn btn-sm btn-primary" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                    </svg>
+                                </a>
+                            </td>
                             </tr>
                             <?php
                         }

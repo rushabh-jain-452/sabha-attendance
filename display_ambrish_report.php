@@ -74,7 +74,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h5 class="text-center">Total number of Members : <?= isset($result) ? $result -> num_rows : 0 ?></h5>
-                <table class="table table-bordered table-responsive-md table-sm align-middle">
+                <table class="table table-bordered table-striped table-responsive-md table-sm align-middle">
                     <thead>
                         <tr class="table-primary">
                             <th class="text-center">ID</th>
@@ -83,6 +83,7 @@
                             <th class="text-center">Birth date</th>
                             <th class="text-center">Mobile No</th>
                             <th class="text-center">Address</th>
+                            <th class="text-center">View Details</th>
                         </tr>
                     </thead>
 					<?php
@@ -96,6 +97,14 @@
                             <td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') ?> </td>
                             <td class="text-center"> <?= $row['mobileno'] ?> </td>
                             <td> <?= $row['address'] ?> </td>
+                            <td class="text-center">
+                                <a href="member_details.php?memberid=<?= $row['memberid'] ?>" class="btn btn-sm btn-primary" title="View Details">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                                    </svg>
+                                </a>
+                            </td>
 						</tr>
 					<?php
 						}
@@ -107,6 +116,8 @@
                 <div class="text-center">
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
+                <br/>
+                <br/>
                 <br/>
             </div>
         </div>

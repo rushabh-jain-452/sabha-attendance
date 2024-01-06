@@ -17,10 +17,10 @@
 
         include_once('conn.php');
 
-        $sql = "SELECT member.memberid as memberid, name, gender, dob, mobileno, address, attendance.timestamp as timestamp FROM member INNER JOIN attendance ON member.memberid = attendance.memberid WHERE attendance.date = '$date' AND mandal='$mandal' ORDER BY attendance.timestamp";
+        $sql = "SELECT member.memberid as memberid, name, gender, dob, mobileno, address, photo, attendance.timestamp as timestamp FROM member INNER JOIN attendance ON member.memberid = attendance.memberid WHERE attendance.date = '$date' AND mandal='$mandal' ORDER BY attendance.timestamp";
 
         if(strcmp($param, "Absent") == 0) {
-            $sql = "SELECT memberid, name, gender, dob, mobileno, address, '' as timestamp FROM member WHERE memberid NOT IN (SELECT memberid from attendance WHERE date = '$date') AND mandal='$mandal'";
+            $sql = "SELECT memberid, name, gender, dob, mobileno, address, photo, '' as timestamp FROM member WHERE memberid NOT IN (SELECT memberid from attendance WHERE date = '$date') AND mandal='$mandal'";
         }
 
 	    $result = $con->query($sql);
@@ -83,7 +83,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2 class="text-center">Total number of Members : <?= isset($result) ? $result -> num_rows : 0 ?></h2>
-                <table class="table table-bordered table-striped table-striped table-responsive-md table-sm align-middle">
+                <table class="table table-bordered table-striped table-responsive-md table-sm align-middle">
                     <thead>
                         <tr class="table-primary">
                             <th class="text-center">ID</th>
@@ -97,6 +97,7 @@
                             <th class="text-center">Birthday</th>
                             <th class="text-center">Mobile No</th>
                             <!-- <th>Address</th> -->
+                            <th class="text-center">Photo</th>
                         </tr>
                     </thead>
 					<?php
@@ -119,6 +120,12 @@
                             <td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M') ?> </td>
                             <td class="text-center"> <?= $row['mobileno'] ?> </td>
                             <!-- <td> <?= $row['address'] ?> </td> -->
+                            <td class="text-center">
+                                <!-- <?= $row['photo'] != '' ? '<img src="images/photos/'.$row['photo'].'" height=200 class="card-img-top" alt="photo" />' : '' ?> -->
+                                <!-- <?= $row['photo'] != '' ? '<img src="images/photos/'.$row['photo'].'" style="height: 150px; width:130px;" class="img-thumbnail" alt="photo" />' : '' ?> -->
+                                <!-- <?= $row['photo'] != '' ? '<img src="images/photos/'.$row['photo'].'" class="img-thumbnail" alt="photo" />' : '' ?> -->
+                                <?= $row['photo'] != '' ? '<img src="images/photos/'.$row['photo'].'" style="max-height: 150px; max-width: 130px;" alt="photo" />' : 'Photo not available' ?>
+                            </td>
 						</tr>
 					<?php
 						}
