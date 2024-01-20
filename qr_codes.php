@@ -7,33 +7,50 @@
     $username = $_SESSION["username"];
     $mandal = $_SESSION["mandal"];
 
-    include_once('conn.php');
-
-    $dindoli_qr_link = 'https://drive.google.com/drive/folders/1qsxhfZh5Dj7D9A17qd1znmvXr3uMYHuO?usp=sharing';
-    $dindoli_pdf_link = 'https://drive.google.com/file/d/1ljNcqw3U-AQ-7FCttVhpSPcqJRF8EKQa/view?usp=sharing';
-
-    $harinagar_qr_link = 'https://drive.google.com/drive/folders/1eNvBx5Di0pOLaNr_zCDN7Rxh0df_OhwR?usp=sharing';
-    $harinagar_pdf_link = 'https://drive.google.com/file/d/1ljNcqw3U-AQ-7FCttVhpSPcqJRF8EKQa/view?usp=sharing';  // TODO : change this
-
     $qr_link = '';
     $pdf_link = '';
 
-    switch ($mandal) {
-        case 'Dindoli':
-            $qr_link = $dindoli_qr_link;
-            $pdf_link = $dindoli_pdf_link;
-            break;
-        case 'Harinagar':
-            $qr_link = $harinagar_qr_link;
-            $pdf_link = $harinagar_pdf_link;
-            break;
-        case 'Navagam':
-            $qr_link = $harinagar_qr_link;
-            $pdf_link = $harinagar_pdf_link;
-            break;
-        default:
-          //code block
-      }
+    include_once('conn.php');
+
+    include_once('conn.php');
+
+    $sql = "SELECT * FROM qr_code_links WHERE mandal='$mandal'";
+
+    $result = $con->query($sql);
+
+    if($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+
+        $qr_link = $row['qr_link'];
+        $pdf_link = $row['qr_pdf_link'];
+    }
+
+    $con->close();
+
+    // $dindoli_qr_link = 'https://drive.google.com/drive/folders/1qsxhfZh5Dj7D9A17qd1znmvXr3uMYHuO?usp=sharing';
+    // $dindoli_pdf_link = 'https://drive.google.com/file/d/1ljNcqw3U-AQ-7FCttVhpSPcqJRF8EKQa/view?usp=sharing';
+
+    // $harinagar_qr_link = 'https://drive.google.com/drive/folders/1eNvBx5Di0pOLaNr_zCDN7Rxh0df_OhwR?usp=sharing';
+    // $harinagar_pdf_link = 'https://drive.google.com/file/d/1ljNcqw3U-AQ-7FCttVhpSPcqJRF8EKQa/view?usp=sharing';  // TODO : change this
+
+    // switch ($mandal) {
+    //     case 'Dindoli':
+    //         $qr_link = $dindoli_qr_link;
+    //         $pdf_link = $dindoli_pdf_link;
+    //         break;
+    //     case 'Harinagar':
+    //         $qr_link = $harinagar_qr_link;
+    //         $pdf_link = $harinagar_pdf_link;
+    //         break;
+    //     case 'Navagam':
+    //         $qr_link = $harinagar_qr_link;
+    //         $pdf_link = $harinagar_pdf_link;
+    //         break;
+    //     default:
+    //       //code block
+    //   }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +70,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">0
+            <div class="col-md-12">
                 <h1 class="text-center"><u>QR Codes of <?= $mandal ?> Mandal</u></h1>
             </div>
         </div>

@@ -79,7 +79,7 @@
         </div>
         <form method="GET" action="" id="searchByMemberForm">
             <div class="form-group row">
-                <label for="date" class="col-md-2 col-form-label"><b>Name</b></label>
+                <label for="memberid" class="col-md-2 col-form-label"><b>Name</b></label>
                 <div class="col-md-3">
                     <select name="memberid" class="form-select" id="memberid">
                         <?php
@@ -94,11 +94,11 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="date" class="col-md-2 col-form-label"><b>From</b></label>
+                <label for="startDate" class="col-md-2 col-form-label"><b>From</b></label>
                 <div class="col-md-3">
                     <input type="date" class="form-control" name="startDate" id="startDate" value="<?= $startDate != null ? $startDate : date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>" required>
                 </div>
-                <label for="date" class="col-md-2 col-form-label"><b>To</b></label>
+                <label for="endDate" class="col-md-2 col-form-label"><b>To</b></label>
                 <div class="col-md-3">
                     <input type="date" class="form-control" name="endDate" id="endDate" value="<?= $endDate != null ? $endDate : date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>" required>
                 </div>
@@ -129,7 +129,10 @@
 							$datetime->add(new DateInterval('PT10H30M'));
 					?>
 						<tr>
-							<td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> </td>
+							<td class="text-center">
+                                <?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('d M Y') ?> 
+                                (<?= DateTime::createFromFormat('Y-m-d', $row['date'])->format('l') ?>)
+                            </td>
 							<td class="text-center"> <?= $datetime->format('g:i A') ?> </td>
 						</tr>
 					<?php
@@ -142,11 +145,18 @@
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
                 <br/>
-                <br/>
+                <div class="text-center">
+                    <span>This report was generated on <span id="reportDate">20 Jan 2024 at 09:29:00</span></span>
+                </div>
                 <br/>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/dateFunctions.js"></script>
+    <script>
+        const spanElement = document.getElementById('reportDate');
+        spanElement.innerText = getFormattedDate();
+    </script>
 </body>
 </html>

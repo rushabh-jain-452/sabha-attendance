@@ -20,6 +20,10 @@
                     <a class="nav-link" href="register.php">Register</a>
                 </li> -->
 
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="fill_member_attendance.php"> Fill Attendance </a>
+                </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Display Members </a>
                     <ul class="dropdown-menu">

@@ -25,6 +25,9 @@
         .align-center {
             text-align: center;
         }
+        h4 {
+            padding: 10px;
+        }
     </style>
 </head>
 
@@ -50,6 +53,8 @@
             <div class="col-md-12">
                 <!-- <h3 class="align-center"><a href="register.php">Register new member</a></h3> -->
                 <hr />
+                <h4 class="align-center"><a href="fill_member_attendance.php">Fill Attendance for Member</a></h4>
+                <hr />
                 <h4 class="align-center"><a href="display_day.php">Check Attendance for Date</a></h4>
                 <h4 class="align-center"><a href="display_day_with_photo.php">Check Attendance for Date (with Photo)</a></h4>
                 <h4 class="align-center"><a href="display_member_attendance.php">Check Attendance for Member</a></h4>
@@ -63,6 +68,8 @@
                 <h4 class="align-center"><a href="display_monthly_birthday_report.php">Monthly Birthday Report</a></h4>
                 <h4 class="align-center"><a href="display_members_not_attending_sabha.php">Members not attending Sabha</a></h4>
                 <h4 class="align-center"><a href="filter_members.php">Search Members</a></h4>
+                <hr />
+                <h4 class="align-center"><a href="qr_codes.php">QR Codes</a></h4>
                 <br/><br/>
                 <br/><br/>
             </div>

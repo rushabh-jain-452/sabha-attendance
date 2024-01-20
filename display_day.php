@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h1 class="text-center"><u><?= strcmp($param, "Present") == 0 ? 'Attendance' : $param ?> for Date</u></h1>
+                <h1 class="text-center"><u><?= strcmp($param, "Present") == 0 ? 'Attendance' : $param ?> for Date - <span id="attendanceDate"></span></u></h1>
             </div>
         </div>
         <form method="GET" action="" id="searchByDayForm">
@@ -131,11 +131,25 @@
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
                 <br/>
-                <br/>
+                <div class="text-center">
+                    <span>This report was generated on <span id="reportDate">20 Jan 2024 at 09:29:00</span></span>
+                </div>
                 <br/>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/dateFunctions.js"></script>
+    <script>
+        const spanElement = document.getElementById('reportDate');
+        // spanElement.innerText = '25 Jan 2024';
+
+        let formattedDate = getFormattedDate();
+
+        spanElement.innerText = formattedDate;
+        // formatDate("20-01-2024");
+
+        document.getElementById("attendanceDate").innerText = formattedDate.substring(0,12);
+    </script>
 </body>
 </html>

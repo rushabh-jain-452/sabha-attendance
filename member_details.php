@@ -132,6 +132,9 @@
             </div>
             <br/>
             <br/>
+            <div class="text-center">
+                <span>This report was generated on <span id="reportDate">20 Jan 2024 at 09:29:00</span></span>
+            </div>
             <br/>
         </div>
         
@@ -140,6 +143,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/dateFunctions.js"></script>
+    <script>
+        const spanElement = document.getElementById('reportDate');
+        spanElement.innerText = getFormattedDate();
+    </script>
 </body>
 
 </html>

@@ -131,7 +131,9 @@
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
                 <br/>
-                <br/>
+                <div class="text-center">
+                    <span>This report was generated on <span id="reportDate">20 Jan 2024 at 09:29:00</span></span>
+                </div>
                 <br/>
             </div>
         </div>
@@ -151,5 +153,10 @@
             window.location.href = "filter_members.php?searchText=" + searchText;
         }
     </script> -->
+    <script type="text/javascript" src="js/dateFunctions.js"></script>
+    <script>
+        const spanElement = document.getElementById('reportDate');
+        spanElement.innerText = getFormattedDate();
+    </script>
 </body>
 </html>

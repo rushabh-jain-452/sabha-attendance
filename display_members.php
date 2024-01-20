@@ -28,7 +28,8 @@
     // $sql = "SELECT * FROM member WHERE Mandal='$mandal' AND active=true ORDER BY memberid";
 
     // All Members
-    $sql = "SELECT * FROM member WHERE Mandal='$mandal' ORDER BY memberid";
+    $sql = "SELECT memberid, name, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, mobileno, address, active FROM member 
+        WHERE Mandal='$mandal' ORDER BY memberid";
 
     $result = $con->query($sql);
     // echo('<script>alert("No of members : '.$result->num_rows.'");</script>');
@@ -69,6 +70,7 @@
                             <th class="text-center">Name</th>
                             <!-- <th class="text-center">Gender</th> -->
                             <th class="text-center">Birth date</th>
+                            <th class="text-center">Age</th>
                             <th class="text-center">Mobile No</th>
                             <th class="text-center">Address</th>
                             <th class="text-center">Active</th>
@@ -85,6 +87,7 @@
                             <td> <?= $row['name'] ?> </td>
                             <!-- <td> <?= $row['gender'] ?> </td> -->
                             <td class="text-center"> <?= DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') ?> </td>
+                            <td class="text-center"> <?= $row['my_age'] ?> </td>
                             <td class="text-center"> <?= $row['mobileno'] ?> </td>
                             <td> <?= $row['address'] ?> </td>
                             <td class="text-center"> <?= $row['active']==1 ? "Yes" : "No" ?> </td>
@@ -109,11 +112,18 @@
                     <button type="button" class="btn btn-primary" onclick="window.print()"> Print </button>
                 </div>
                 <br/>
-                <br/>
+                <div class="text-center">
+                    <span>This report was generated on <span id="reportDate">20 Jan 2024 at 09:29:00</span></span>
+                </div>
                 <br/>
             </div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="js/dateFunctions.js"></script>
+    <script>
+        const spanElement = document.getElementById('reportDate');
+        spanElement.innerText = getFormattedDate();
+    </script>
 </body>
 </html>
