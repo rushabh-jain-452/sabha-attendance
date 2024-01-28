@@ -12,7 +12,7 @@
     if(isset($_GET['memberid'])) {
         $memberid = $_GET['memberid'];
 
-        $sql = "UPDATE member SET active=1 WHERE memberid=$memberid";
+        $sql = "UPDATE member SET active=true WHERE memberid=$memberid";
 
         if($con->query($sql)){
             echo '<script> alert("Member activated successfully"); </script>';

@@ -11,6 +11,7 @@
 
     $date = isset($_GET['date']) ? $_GET['date'] : '';
     $param = isset($_GET['param']) ? $_GET['param'] : 'Present';
+    $formattedDate = '';
 
     if(isset($_GET['date'])) {
         date_default_timezone_set('Asia/Kolkata');
@@ -20,11 +21,15 @@
         $sql = "SELECT member.memberid as memberid, name, gender, dob, mobileno, address, photo, attendance.timestamp as timestamp FROM member INNER JOIN attendance ON member.memberid = attendance.memberid WHERE attendance.date = '$date' AND mandal='$mandal' ORDER BY attendance.timestamp";
 
         if(strcmp($param, "Absent") == 0) {
-            $sql = "SELECT memberid, name, gender, dob, mobileno, address, photo, '' as timestamp FROM member WHERE memberid NOT IN (SELECT memberid from attendance WHERE date = '$date') AND mandal='$mandal'";
+            $sql = "SELECT memberid, name, gender, dob, mobileno, address, photo, '' as timestamp FROM member WHERE memberid NOT IN (SELECT memberid from attendance WHERE date = '$date') AND mandal='$mandal' AND active=true";
         }
 
 	    $result = $con->query($sql);
         // echo('<script>alert("No of members : '.$result->num_rows.'");</script>');
+
+        // Format date
+        // $date = new Date();
+        $formattedDate = DateTime::createFromFormat('Y-m-d', $date)->format('d M Y');
     }
 ?>
 <!DOCTYPE html>
@@ -50,7 +55,8 @@
         </div>
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h1 class="text-center"><u><?= strcmp($param, "Present") == 0 ? 'Attendance' : $param ?> for Date</u></h1>
+                <h2 class="text-center"><u><?= strcmp($param, "Present") == 0 ? 'Attendance' : $param ?> for Date - 
+                <span id="attendanceDate"><?= $formattedDate ?></span></u></h2>
             </div>
         </div>
         <form method="GET" action="" id="searchByDayForm">
@@ -82,7 +88,7 @@
         <hr/>
         <div class="row">
             <div class="col-md-12">
-                <h2 class="text-center">Total number of Members : <?= isset($result) ? $result -> num_rows : 0 ?></h2>
+                <h3 class="text-center">Total number of Members : <?= isset($result) ? $result -> num_rows : 0 ?></h3>
                 <table class="table table-bordered table-striped table-responsive-md table-sm align-middle">
                     <thead>
                         <tr class="table-primary">
