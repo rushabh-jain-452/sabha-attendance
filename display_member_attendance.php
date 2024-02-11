@@ -42,7 +42,7 @@
         try {
             if($n != 0) {
                 $per = $n * 100 / $weeks;
-                $per = round($per, 2);
+                $per = round($per, 0);
             }
         }
         catch (Exception $e) {

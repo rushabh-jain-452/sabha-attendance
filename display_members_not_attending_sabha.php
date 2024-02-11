@@ -62,7 +62,7 @@
         <form method="GET" action="" id="searchByDaysForm">
             <div class="row g-3 align-items-center justify-content-center">
                 <div class="col-auto">
-                    <label for="days" class="col-form-label"><b>Not attending Sabha from last</b></label>
+                    <label for="days" class="col-form-label"><b>Not attended Sabha from last</b></label>
                 </div>
                 <div class="col-auto">
                     <input type="number" class="form-control" name="days" id="days" placeholder="Days" value="<?= $days != '' ? $days : 30 ?>" required>
@@ -80,7 +80,7 @@
         <div class="row">
             <div class="col-md-12 pt-3">
                 <h3 class="text-center"><u>Members of
-                        <?= $mandal ?> Mandal not attending Sabha from last
+                        <?= $mandal ?> Mandal not attended Sabha from last
                         <?= $days ?> days
                     </u></h3>
             </div>

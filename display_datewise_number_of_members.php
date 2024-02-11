@@ -104,7 +104,7 @@
                             try {
                                 if($numberOfMembers != 0 && $row['number_of_members'] != 0) {
                                     $per = $row['number_of_members'] * 100 / $numberOfMembers;
-                                    $per = round($per, 2);
+                                    $per = round($per, 0);
                                 }
                             }
                             catch (Exception $e) {

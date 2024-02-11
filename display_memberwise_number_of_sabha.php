@@ -104,7 +104,7 @@
                             try {
                                 if($totalNoOfSabha != 0 && $row['number_of_sabha'] != 0) {
                                     $per = $row['number_of_sabha'] * 100 / $totalNoOfSabha;
-                                    $per = round($per, 2);
+                                    $per = round($per, 0);
                                 }
                             }
                             catch (Exception $e) {
@@ -114,7 +114,7 @@
 					?>
 						<tr>
 							<td class="text-center"> <?= $row['memberid'] ?> </td>
-                            <td class="text-center"> <?= $row['name'] ?> </td>
+                            <td> <?= $row['name'] ?> </td>
 							<td class="text-center"> <?= $row['number_of_sabha'] ?> </td>
                             <td class="text-center"> <?= $per ?> % </td>
 						</tr>
