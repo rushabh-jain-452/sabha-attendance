@@ -11,13 +11,13 @@
 
     $months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
 
-    $month = date('m') - 1;
+    $month = date('m');
 
     if (isset($_GET['month'])) {
         $month = $_GET['month'];
     }
 
-    $sql = "SELECT memberid, name, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, mobileno, address, active FROM member WHERE MONTH(dob) = $month+1 AND mandal='$mandal' AND active=true ORDER BY DAY(dob)";
+    $sql = "SELECT memberid, name, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, mobileno, address, active FROM member WHERE MONTH(dob) = $month AND mandal='$mandal' AND active=true ORDER BY DAY(dob)";
 
     $result = $con->query($sql);
 ?>
@@ -55,8 +55,8 @@
                 <div class="col-auto">
                     <select name="month" class="form-select" id="month">
                         <?php
-                            for($i=0; $i < sizeof($months); $i++) {
-                                echo('<option value="'.$i.'" '.($month==$i?'selected':'').'>'.$months[$i].'</option>');
+                            for($i=1; $i <= sizeof($months); $i++) {
+                                echo('<option value="'.$i.'" '.($month==$i?'selected':'').'>'.$months[$i-1].'</option>');
                             }
                         ?>
                     </select>
@@ -70,7 +70,7 @@
         <hr />
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h3 class="text-center"><u>Members of <?= $mandal ?> Mandal having birthday in <?= $month ?> Month</u></h3>
+                <h3 class="text-center"><u>Members of <?= $mandal ?> Mandal having birthday in <b><?= $months[$month-1] ?></b> Month</u></h3>
             </div>
         </div>
         <div class="row">

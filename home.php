@@ -58,6 +58,9 @@
                 <h4 class="align-center"><a href="display_day.php">Check Attendance for Date</a></h4>
                 <h4 class="align-center"><a href="display_day_with_photo.php">Check Attendance for Date (with Photo)</a></h4>
                 <h4 class="align-center"><a href="display_member_attendance.php">Check Attendance for Member</a></h4>
+                <h4 class="align-center"><a href="display_datewise_number_of_members.php">Date-wise Number of Members</a></h4>
+                <h4 class="align-center"><a href="display_memberwise_number_of_sabha.php">Member-wise Number of Sabha Attended</a></h4>
+                <h4 class="align-center"><a href="display_timewise_number_of_sabha.php">Time-wise Number of Sabha Attended</a></h4>
                 <hr />
                 <h4 class="align-center"><a href="display_members.php">All Members</a></h4>
                 <h4 class="align-center"><a href="display_active_members.php">Active Members</a></h4>

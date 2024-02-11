@@ -132,10 +132,10 @@
             </div>
             <br/>
             <br/>
-            <div class="text-center">
+            <!-- <div class="text-center">
                 <span>This report was generated on <span id="reportDate">20 Jan 2024 at 09:29:00</span></span>
             </div>
-            <br/>
+            <br/> -->
         </div>
         
     </div>

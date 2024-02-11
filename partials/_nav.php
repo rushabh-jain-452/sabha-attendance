@@ -45,6 +45,9 @@
                         <li><a class="dropdown-item" href="display_day.php">Check Attendance for Date</a></li>
                         <li><a class="dropdown-item" href="display_day_with_photo.php">Check Attendance for Date (with Photo)</a></li>
                         <li><a class="dropdown-item" href="display_member_attendance.php">Check Attendance for Member</a></li>
+                        <li><a class="dropdown-item" href="display_datewise_number_of_members.php">Date-wise Number of Members</a></li>
+                        <li><a class="dropdown-item" href="display_memberwise_number_of_sabha.php">Member-wise Number of Sabha Attended</a></li>
+                        <li><a class="dropdown-item" href="display_timewise_number_of_sabha.php">Time-wise Number of Sabha Attended</a></li>
                         <!-- <li class="nav-item dropdown">
                             <a>Display Members</a>
                             <ul class="dropdown-menu">

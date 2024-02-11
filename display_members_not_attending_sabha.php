@@ -28,7 +28,7 @@
     if (isset($_GET['days'])) {
         $days = $_GET['days'];
 
-        $sql = "SELECT memberid, name, dob, mobileno, address, active from member WHERE mandal='$mandal' AND memberid NOT IN (SELECT DISTINCT memberid FROM attendance WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL $days DAY) AND CURRENT_DATE())";
+        $sql = "SELECT memberid, name, dob, mobileno, address, active from member WHERE mandal='$mandal' AND active=true AND memberid NOT IN (SELECT DISTINCT memberid FROM attendance WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL $days DAY) AND CURRENT_DATE())";
 
         $result = $con->query($sql);
     }
@@ -62,7 +62,7 @@
         <form method="GET" action="" id="searchByDaysForm">
             <div class="row g-3 align-items-center justify-content-center">
                 <div class="col-auto">
-                    <label for="days" class="col-form-label"><b>Not attending sabh from last</b></label>
+                    <label for="days" class="col-form-label"><b>Not attending Sabha from last</b></label>
                 </div>
                 <div class="col-auto">
                     <input type="number" class="form-control" name="days" id="days" placeholder="Days" value="<?= $days != '' ? $days : 30 ?>" required>
