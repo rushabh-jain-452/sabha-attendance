@@ -19,7 +19,8 @@
     // Delete Attendance
     if(isset($_GET['deleteDate'])) {
         $deleteDate = $_GET['deleteDate'];
-        $sql = "DELETE FROM attendance WHERE date='$deleteDate'";
+        // $sql = "DELETE FROM attendance WHERE date='$deleteDate' AND mandal='$mandal'";
+        $sql = "DELETE FROM attendance WHERE date='$deleteDate' AND memberid IN (SELECT memberid FROM member WHERE mandal='$mandal')";
         if($con->query($sql)){
             echo '<script> alert("Attendance deleted successfully"); </script>';
         }else{
