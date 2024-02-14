@@ -85,6 +85,7 @@
                 <h4 class="text-center"><u>Member-wise Number of Sabha attended from <?= isset($startDate) ? DateTime::createFromFormat('Y-m-d', $startDate)->format('d M Y') : '' ?> 
                     to <?= isset($endDate) ? DateTime::createFromFormat('Y-m-d', $endDate)->format('d M Y') : '' ?> </u>
                 </h4>
+                <h5 class="text-center">Total number of Members : <?= isset($result) ? $result -> num_rows : 0 ?></h5>
                 <table class="table table-light table-bordered table-responsive-md table-sm table-striped align-middle table-align-center">
                     <tr class="table-primary">
                         <th class="text-center">ID</th>

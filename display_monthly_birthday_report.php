@@ -75,9 +75,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h5 class="text-center">Total number of Members :
-                    <?= isset($result) ? $result->num_rows : 0 ?>
-                </h5>
+                <h5 class="text-center">Total number of Members :<?= isset($result) ? $result->num_rows : 0 ?></h5>
                 <table class="table table-bordered table-striped table-responsive-md table-sm align-middle">
                     <thead>
                         <tr class="table-primary">
