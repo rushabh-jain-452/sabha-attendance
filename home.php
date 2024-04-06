@@ -63,6 +63,7 @@
                 <h4 class="align-center"><a href="display_timewise_number_of_sabha.php">Time-wise Number of Sabha Attended</a></h4>
                 <hr />
                 <h4 class="align-center"><a href="display_members.php">All Members</a></h4>
+                <h4 class="align-center"><a href="display_members_with_photo.php">All Members (with Photo)</a></h4>
                 <h4 class="align-center"><a href="display_active_members.php">Active Members</a></h4>
                 <h4 class="align-center"><a href="display_inactive_members.php">Inactive Members</a></h4>
                 <h4 class="align-center"><a href="display_ambrish_report.php">Ambrish Report</a></h4>

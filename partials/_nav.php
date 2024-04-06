@@ -28,6 +28,7 @@
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Display Members </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="display_members.php">All Members</a></li>
+                        <li><a class="dropdown-item" href="display_members_with_photo.php">All Members (with Photo)</a></li>
                         <li><a class="dropdown-item" href="display_active_members.php">Active Members</a></li>
                         <li><a class="dropdown-item" href="display_inactive_members.php">Inactive Members</a></li>
                         <li><a class="dropdown-item" href="display_ambrish_report.php">Ambrish Report</a></li>
