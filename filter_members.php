@@ -11,7 +11,7 @@
 
     $searchText = '';
     if(isset($_GET['btnSearch']) && isset($_GET['searchText'])) {
-        $searchText = $_GET['searchText'];
+        $searchText = trim($_GET['searchText']);
         $sql = "SELECT memberid, name, mobileno, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, marital_status, blood_group, qualification, occupation, address, active 
         FROM member WHERE Mandal='$mandal' AND (memberid LIKE '%$searchText%' OR name LIKE '%$searchText%' OR mobileno LIKE '%$searchText%' OR dob LIKE '%$searchText%' OR age LIKE '%$searchText%' OR marital_status LIKE '%$searchText%' OR blood_group LIKE '%$searchText%' OR qualification LIKE '%$searchText%' OR occupation LIKE '%$searchText%' OR address LIKE '%$searchText%') ORDER BY memberid";
     } else {

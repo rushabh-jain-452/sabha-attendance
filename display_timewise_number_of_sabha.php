@@ -23,7 +23,9 @@
     if(isset($_GET['startDate'])) {
         if($sabhaTime != null) {
             $arr = explode(':', $_GET['sabhaTime']);
-            $sabhaHour = $arr[0] - 10;
+            // $sabhaHour = $arr[0] - 10;
+            $sabhaHour = $arr[0] - 9;
+
             $sabhaMin = $arr[1];
 
             // Time conversion for MySQL time based on server
