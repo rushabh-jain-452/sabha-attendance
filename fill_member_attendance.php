@@ -129,7 +129,7 @@
 		<hr/>
         <div class="row">
             <div class="col-md-12 pt-3">
-                <h4 class="text-center">Attended Sabha</h4>
+                <h4 class="text-center">Attended <?= isset($result) ? $result -> num_rows : 0 ?> Sabha</h4>
             </div>
         </div>
         <div class="row">
