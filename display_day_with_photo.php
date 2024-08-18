@@ -1,4 +1,6 @@
 <?php
+    include_once('constants.php');
+
     session_start();
     if(!isset($_SESSION["username"])){
         header("location:login.php");
@@ -115,7 +117,7 @@
                         while($row = $result->fetch_assoc()) { 
                             $datetime = new DateTime($row['timestamp']);
 							// $datetime->add(new DateInterval('PT10H30M'));
-                            $datetime->add(new DateInterval('PT9H30M'));
+                            $datetime->add(new DateInterval('TIME_DIFFERENCE'));
 					?>
 						<tr>
 							<td class="text-center"> <?= $row['memberid'] ?> </td>
