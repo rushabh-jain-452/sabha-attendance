@@ -16,7 +16,7 @@
         $memberid = $_GET['memberid'];
 
         // Only Active Members
-        $sql = "SELECT memberid, name, mobileno, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, marital_status, blood_group, qualification, occupation, address, is_ambrish, satsang_patrika, email, photo, active
+        $sql = "SELECT memberid, name, mobileno, gender, dob, TIMESTAMPDIFF(YEAR, dob, CURDATE()) AS my_age, marital_status, blood_group, qualification, occupation, address, address_location, location_pluscode, latitude_longitude, is_ambrish, haridham_id, aadhaar_no, aadhaar_dob, pan, satsang_patrika, email, photo, active, comments, addtimestamp
         FROM member WHERE Mandal='$mandal' AND memberid=$memberid";
 
         $result = $con->query($sql);
@@ -77,6 +77,12 @@
             </div>
             <div class="row">
                 <div class="col-md-12 pt-3">
+                    <b>Gender : </b>
+                    <?= $row != null ? $row['gender'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
                     <b>Birth Date : </b>
                     <?= $row != null ? DateTime::createFromFormat('Y-m-d', $row['dob'])->format('d M Y') : '' ?>
                     (<?= $row != null ? $row['my_age'] : '' ?> years)
@@ -102,8 +108,32 @@
             </div>
             <div class="row">
                 <div class="col-md-12 pt-3">
+                    <b>Occupation : </b>
+                    <?= $row != null ? $row['occupation'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
                     <b>Address : </b>
                     <?= $row != null ? $row['address'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Address Location : </b>
+                    <?= $row != null ? $row['address_location'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Location Plus code : </b>
+                    <?= $row != null ? $row['location_pluscode'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Latitute Longitude : </b>
+                    <?= $row != null ? $row['latitude_longitude'] : '' ?>
                 </div>
             </div>
             <div class="row">
@@ -114,14 +144,56 @@
             </div>
             <div class="row">
                 <div class="col-md-12 pt-3">
+                    <b>Haridham ID : </b>
+                    <?= $row != null ? $row['haridham_id'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Aadhaar number : </b>
+                    <?= $row != null ? $row['aadhaar_no'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Aadhaar DOB : </b>
+                    <?= $row != null ? DateTime::createFromFormat('Y-m-d', $row['aadhaar_dob'])->format('d M Y') : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>PAN : </b>
+                    <?= $row != null ? $row['pan'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
                     <b>Getting Satsang Patrika : </b>
                     <?= $row != null && $row['satsang_patrika']==1 ? "Yes" : "No" ?>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 pt-3">
+                    <b>Email : </b>
+                    <?= $row != null ? $row['email'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
                     <b>Active : </b>
                     <?= $row != null && $row['active']==1 ? "Yes" : "No" ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Comments : </b>
+                    <?= $row != null ? $row['comments'] : '' ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pt-3">
+                    <b>Creation Timestamp : </b>
+                    <?= $row != null ? $row['addtimestamp'] : '' ?>
                 </div>
             </div>
             <br/>

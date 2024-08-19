@@ -57,7 +57,10 @@
 
 	// Display Records
     if($memberid != null) {
-		$sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 52";
+        // with limit 52
+		// $sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 52";
+        // with limit 10000
+		$sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 10000";
 		$result = $con->query($sql);
 	}
 ?>
@@ -102,6 +105,8 @@
                             while($row = $memberResult->fetch_assoc()) { 
                         ?>
                             <option value="<?= $row['memberid'].','.$row['name'] ?>" <?= $memberid == $row['memberid'] ? 'selected' : '' ?>> <?= $row['name'] ?> </option>
+                            <!-- with id in bracket -->
+                            <!-- <option value="<?= $row['memberid'].','.$row['name'] ?>" <?= $memberid == $row['memberid'] ? 'selected' : '' ?>> <?= $row['name'].' ('.$row['memberid'].')' ?> </option> -->
                         <?php
                             }
                         ?>

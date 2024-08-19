@@ -5,15 +5,22 @@
         $username = $_POST['txtUsername'];
         $password = $_POST['txtPassword'];
 
+        // $browser = get_browser();
+        // $browser = get_browser(null, true);
+        $userIpAddress = $_SERVER['REMOTE_ADDR'];
+        $browserDetails = $_SERVER['HTTP_USER_AGENT'];
+
         // $sql = "SELECT * FROM admin WHERE username='$username' AND password='$password' AND active=true";
         $sql = "SELECT * FROM admin WHERE username='$username' AND active=true";
 
         $result = $con->query($sql);
-        $con->close();
+        // $con->close();
         if($result->num_rows == 1){
             session_start();
             // $row = $result->fetch_row();
             $row = $result->fetch_assoc();
+
+            $mndl = $row['mandal'];
 
             // echo(md5($password));
 
@@ -22,20 +29,40 @@
                 // var_dump($row);
                 $_SESSION['username'] = $row['username'];
                 $_SESSION['name'] = $row['name'];
-                $_SESSION['mandal'] = $row['mandal'];
+                $_SESSION['mandal'] = $mndl;
+
                 // echo $row['username'];
                 // echo(md5($password));
                 // exit();
+
+                // login success event
+                $sql = "INSERT INTO login_history (username, mandal, successful, event, USER_IP_ADDRESS, HTTP_USER_AGENT) VALUES ('$username', '$mndl', 1, 'Login Successful', '$userIpAddress', '$browserDetails')";
+                $con->query($sql);
+                $con->close();
+
                 $result->free();
                 header('location:home.php');
                 exit();
             } else {
+                // Invalid password event
+                $sql = "INSERT INTO login_history (username, mandal, successful, event, USER_IP_ADDRESS, HTTP_USER_AGENT) VALUES ('$username', '$mndl', 0, 'Invalid Password', '$userIpAddress', '$browserDetails')";
+                $con->query($sql);
+                $con->close();
+
                 $result->free();
                 echo '<script>alert("Invalid Password");</script>';
             }
-        }else{
+        } else {
+            // Invalid Username event
+            $sql = "INSERT INTO login_history (username, mandal, successful, event, USER_IP_ADDRESS, HTTP_USER_AGENT) VALUES ('$username', '', 0, 'Invalid Username', '$userIpAddress', '$browserDetails')";
+            $con->query($sql);
+            $con->close();
+
             $result->free();
             echo '<script>alert("Invalid Username");</script>';
+            // echo '<script>alert("Invalid Username from IP address '.$_SERVER['REMOTE_ADDR'].'");</script>';
+            // echo '<script>alert("Invalid Username from IP address '.$_SERVER['HTTP_USER_AGENT'].'");</script>';
+            // echo '<script>alert("Invalid Username from browser : '.UserInfo::get_ip().'");</script>';
             // echo 'Invalid username or password';
         }
     }
@@ -125,6 +152,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <!-- <script>
+        var userAgent = navigator.userAgent;
+        console.log('START');
+        console.log(userAgent);
+        console.log('END');
+    </script> -->
 </body>
 
 </html>

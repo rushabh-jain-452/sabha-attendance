@@ -71,6 +71,7 @@
                 <h4 class="align-center"><a href="display_age_wise_members.php">Age-wise Report</a></h4>
                 <h4 class="align-center"><a href="display_monthly_birthday_report.php">Monthly Birthday Report</a></h4>
                 <h4 class="align-center"><a href="display_members_not_attending_sabha.php">Members not attending Sabha</a></h4>
+                <h4 class="align-center"><a href="display_members_not_attending_sabha_with_photo.php">Members not attending Sabha (with Photo)</a></h4>
                 <h4 class="align-center"><a href="filter_members.php">Search Members</a></h4>
                 <hr />
                 <h4 class="align-center"><a href="qr_codes.php">QR Codes</a></h4>

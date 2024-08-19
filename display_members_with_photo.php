@@ -95,7 +95,7 @@
                                 <?= $row['photo'] != '' ? '<img src="images/photos/'.$row['photo'].'" style="max-height: 150px; max-width: 130px;" alt="photo" />' : 'Photo not available' ?>
                             </td>
                             <td class="text-center"> <?= $row['active']==1 ? "Yes" : "No" ?> </td>
-                            <td class="text-center"><a href="display_members.php?memberid=<?= $row['memberid'] ?>&action=<?=$row['active']==1?0:1?>" class="btn btn-sm btn-primary"><?= $row['active']==1 ? 'Deactivate' : 'Activate' ?></a></td>
+                            <td class="text-center"><a href="display_members_with_photo.php?memberid=<?= $row['memberid'] ?>&action=<?=$row['active']==1?0:1?>" class="btn btn-sm btn-primary"><?= $row['active']==1 ? 'Deactivate' : 'Activate' ?></a></td>
                             <td class="text-center">
                                 <a href="member_details.php?memberid=<?= $row['memberid'] ?>" class="btn btn-sm btn-primary" title="View Details">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">

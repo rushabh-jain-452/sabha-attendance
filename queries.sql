@@ -20,3 +20,21 @@ CREATE TABLE `attendancedb`.`attendance`
     CONSTRAINT attendance_memberid_fk FOREIGN KEY (memberid) REFERENCES member(memberid),
     CONSTRAINT unique_memberid_date UNIQUE(memberid, date)
 );
+
+CREATE TABLE `attendancedb`.`admin` (
+  `adminid` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `mandal` varchar(50) NOT NULL,
+  `mobileno` varchar(15) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `addtimestamp` timestamp NOT NULL DEFAULT current_timestamp()
+);
+
+CREATE TABLE `qr_code_links` (
+  `linkid` int(11) NOT NULL,
+  `mandal` varchar(50) NOT NULL,
+  `qr_link` varchar(200) NOT NULL,
+  `qr_pdf_link` varchar(200) NOT NULL
+);

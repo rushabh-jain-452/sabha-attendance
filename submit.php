@@ -61,7 +61,10 @@
 
 	// Display Records
     if($memberid != null) {
-		$sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 52";
+		// with limit 52
+		// $sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 52";
+        // with limit 10000
+		$sql = "SELECT * FROM attendance WHERE memberid = $memberid ORDER BY attendanceid DESC LIMIT 10000";
 		$result = $con->query($sql);
 	}
 ?>

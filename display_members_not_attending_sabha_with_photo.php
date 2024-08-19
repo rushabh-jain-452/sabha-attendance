@@ -28,7 +28,7 @@
     if (isset($_GET['days'])) {
         $days = $_GET['days'];
 
-        $sql = "SELECT memberid, name, dob, mobileno, address, active from member WHERE mandal='$mandal' AND active=true AND memberid NOT IN (SELECT DISTINCT memberid FROM attendance WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL $days DAY) AND CURRENT_DATE())";
+        $sql = "SELECT memberid, name, dob, mobileno, address, photo, active from member WHERE mandal='$mandal' AND active=true AND memberid NOT IN (SELECT DISTINCT memberid FROM attendance WHERE date BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL $days DAY) AND CURRENT_DATE())";
 
         $result = $con->query($sql);
     }
@@ -99,6 +99,7 @@
                             <th class="text-center">Birth date</th>
                             <th class="text-center">Mobile No</th>
                             <th class="text-center">Address</th>
+                            <th class="text-center">Photo</th>
                             <!-- <th class="text-center">Active</th>
                             <th class="text-center">Action</th> -->
                             <th class="text-center">View Details</th>
@@ -124,6 +125,9 @@
                                 </td>
                                 <td>
                                     <?= $row['address'] ?>
+                                </td>
+                                <td class="text-center">
+                                    <?= $row['photo'] != '' ? '<img src="images/photos/'.$row['photo'].'" style="max-height: 150px; max-width: 130px;" alt="photo" />' : 'Photo not available' ?>
                                 </td>
                                 <!-- <td class="text-center">
                                     <?= $row['active'] == 1 ? "Yes" : "No" ?>
