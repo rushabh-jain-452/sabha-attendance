@@ -9,4 +9,6 @@
     // live-2  // sabha-attendance
     // $con = new mysqli("sql304.infinityfree.com", "if0_36322457", "BUH8MxMuDoM", "if0_36322457_attendancedb") or die('Error in establishing connection...');
     // $con = new mysqli("localhost", "if0_36322457", "BUH8MxMuDoM", "if0_36322457_attendancedb") or die('Error in establishing connection...');
+
+    // $con->set_charset('utf8mb4');
 ?>

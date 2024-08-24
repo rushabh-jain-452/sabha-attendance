@@ -22,7 +22,7 @@
     $memberid = '';
     $name = '';
     $date = '';
-    if(isset($_GET['btnSubmit']) && isset($_GET['member'])) {
+    if(isset($_GET['btnSubmit']) && isset($_GET['member']) && $_GET['member'] != -1) {
         // $arr = str_split($_GET['member']);
         $arr = explode(',', $_GET['member']);
 
@@ -90,7 +90,7 @@
                 <h3 class="text-center"><u>Fill Attendance for Member</u></h3>
             </div>
         </div>
-        <form method="GET" action="" id="searchByMemberForm">
+        <form method="GET" action="" id="searchByMemberForm" onsubmit="return submitFunction(event)">
             <div class="form-group row">
                 <label for="date" class="col-md-2 col-form-label"><b>Date</b></label>
                 <div class="col-md-3">
@@ -101,6 +101,7 @@
                 <label for="member" class="col-md-2 col-form-label"><b>Name</b></label>
                 <div class="col-md-3">
                     <select name="member" class="form-select" id="member">
+                        <option value="-1" <?= $memberid == '' ? 'selected' : '' ?>> Select member </option>
                         <?php
                             while($row = $memberResult->fetch_assoc()) { 
                         ?>
@@ -184,6 +185,20 @@
     <script>
         const spanElement = document.getElementById('reportDate');
         spanElement.innerText = getFormattedDate();
+
+        function submitFunction(event) {
+            // console.log(event);
+
+            const selectElement = document.getElementById('member');
+            // console.log(selectElement.value);
+
+            if(selectElement.value == -1) {
+                alert("Please Select member name");
+                return false;
+            }
+
+            return true;
+        }
     </script>
 </body>
 </html>

@@ -85,7 +85,7 @@
             <div class="form-group row">
                 <label for="startDate" class="col-md-2 col-form-label"><b>From</b></label>
                 <div class="col-md-3">
-                    <input type="date" class="form-control" name="startDate" id="startDate" value="<?= $startDate != null ? $startDate : date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>" required>
+                    <input type="date" class="form-control" name="startDate" id="startDate" value="<?= $startDate != null ? $startDate : date('Y-m').'-01' ?>" max="<?= date('Y-m-d') ?>" required>
                 </div>
                 <label for="endDate" class="col-md-2 col-form-label"><b>To</b></label>
                 <div class="col-md-3">
