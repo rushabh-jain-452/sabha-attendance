@@ -35,6 +35,7 @@
                         <li><a class="dropdown-item" href="display_detailed_report.php">Detailed Report</a></li>
                         <li><a class="dropdown-item" href="display_age_wise_members.php">Age-wise Report</a></li>
                         <li><a class="dropdown-item" href="display_monthly_birthday_report.php">Monthly Birthday Report</a></li>
+                        <li><a class="dropdown-item" href="display_monthly_birthday_report_with_photo.php">Monthly Birthday Report (with Photo)</a></li>
                         <li><a class="dropdown-item" href="display_members_not_attending_sabha.php">Members not attending Sabha</a></li>
                         <li><a class="dropdown-item" href="display_members_not_attending_sabha_with_photo.php">Members not attending Sabha (with Photo)</a></li>
                         <li><a class="dropdown-item" href="filter_members.php">Search Members</a></li>
